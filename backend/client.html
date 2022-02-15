@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <input type="text" id="name">
+        <input type="text" id="message">
+        <textarea id="history"></textarea>
+        <button id="send">send</button>
+        <script>
+            const socket = new WebSocket("ws://localhost:7000/ws")
+            socket.onopen = () => {
+                // socket.send("Hello")
+            }
+            socket.onmessage = (event) => {
+                const obj = JSON.parse(event.data)
+
+
+                const history = document.getElementById('history')
+
+                history.innerText = history.innerText +  "\n" + obj.name +  ": " + obj.message
+            }
+            socket.onclose = () => {
+
+            }
+            const send = document.getElementById('send')
+            send.addEventListener('click', () => {
+                const name = document.getElementById('name')
+                const message = document.getElementById('message')
+                socket.send(JSON.stringify({name: name.value, message: message.value}))
+            })
+        </script>
+    </body>
+</html>
