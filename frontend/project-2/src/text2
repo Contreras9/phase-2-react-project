@@ -1,53 +1,51 @@
-import './App.css';
-import { useEffect, useState } from 'react/cjs/react.production.min';
-import UserList from './components/UserList';
-
-function App() {
-
-  const [users, setUsers] = useState({})
-  const [send, setSend] = useState()
-
-  useEffect(() => {
-    const socket = new WebSocket("ws://localhost:7000/ws")
-
-    socket.onopen = () => {
-      const sendFunc = obj => {
-        socket.send(JSON.stringify(obj))
-      }
-      setSend(sendFunc)
-    }
-
-    socket.onmessage = (event) => {
-      const obj = JSON.parse(event.data)
-      setUsers(obj.users)
-      // if (obj.action === "join")
-      // {
-      //   setUsers(users => {
-      //     users[obj.user.name] = obj.user
-      //     return users
-      //   })
-      // } else if (obj.action === "leave") {
-      //   setUsers(users => {
-      //     delete users[obj.user.name]
-      //     return users
-      //   })
-      // }
-    }
-
-    socket.onclose = () => {
-
-    }
-  }, [])
-
-
-
-  return (
-    <div className="wrapper">
-      <div className="container">
-      <UserList
-        users={Object.values(users)}
-      />
-        {/* <div className="right">
+<div className="wrapper">
+    <div className="container">
+        <div className="left">
+            <div className="top">
+                <input type="text" placeholder="Search" />
+                <a href="javascript:;" className="search"></a>
+            </div>
+            <ul className="people">
+                <li className="person" data-chat="person1">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+                    <span className="name">Thomas Bangalter</span>
+                    <span className="time">2:09 PM</span>
+                    <span className="preview">I was wondering...</span>
+                </li>
+                <li className="person" data-chat="person2">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+                    <span className="name">Dog Woofson</span>
+                    <span className="time">1:44 PM</span>
+                    <span className="preview">I've forgotten how it felt before</span>
+                </li>
+                <li className="person" data-chat="person3">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/louis-ck.jpeg" alt="" />
+                    <span className="name">Louis CK</span>
+                    <span className="time">2:09 PM</span>
+                    <span className="preview">But we’re probably gonna need a new carpet.</span>
+                </li>
+                <li className="person" data-chat="person4">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/bo-jackson.jpg" alt="" />
+                    <span className="name">Bo Jackson</span>
+                    <span className="time">2:09 PM</span>
+                    <span className="preview">It’s not that bad...</span>
+                </li>
+                <li className="person" data-chat="person5">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/michael-jordan.jpg" alt="" />
+                    <span className="name">Michael Jordan</span>
+                    <span className="time">2:09 PM</span>
+                    <span className="preview">Wasup for the third time like is 
+you blind bitch</span>
+                </li>
+                <li className="person" data-chat="person6">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/drake.jpg" alt="" />
+                    <span className="name">Drake</span>
+                    <span className="time">2:09 PM</span>
+                    <span className="preview">howdoyoudoaspace</span>
+                </li>
+            </ul>
+        </div>
+        <div className="right">
             <div className="top"><span>To: <span className="name">Dog Woofson</span></span></div>
             <div className="chat" data-chat="person1">
                 <div className="conversation-start">
@@ -176,10 +174,6 @@ function App() {
                 <a href="javascript:;" className="write-link smiley"></a>
                 <a href="javascript:;" className="write-link send"></a>
             </div>
-        </div> */}
+        </div>
     </div>
 </div>
-  );
-}
-
-export default App;
