@@ -9,11 +9,12 @@ function Chat({send, users}) {
         SetMessage(event.target.value)
     }
     function clickHandler() {
-        send.send({action: "message", receiver: "Tom", message: message})
+        send.send({action: "message", receiver: name, message: message})
         SetMessage("")
     }
     console.log(name)
     const messages = name in users ? users[name].messages : [];
+    console.log(users)
     return (
         <>
         <div className="top"><span>To: <span className="name">Dog Woofson</span></span></div>
@@ -24,7 +25,8 @@ function Chat({send, users}) {
                 {messages.map(message => {
                     return (
                         <Message 
-                          message={message}
+                          message={message.message}
+                          who={message.who}
                         />
                     )
                 })}

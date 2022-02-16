@@ -14,6 +14,7 @@ function UserList({users}) {
                             <User
                             key={user.key}
                             name={user.name}
+                            
                             />
                         )
                     })}

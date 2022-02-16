@@ -1,12 +1,11 @@
 import react from "react";
-import { useHistory } from "react-router-dom";
 
 function Login({send}) {
-    const history = useHistory()
+    
     function submitHandler(event) {
         event.preventDefault()
         send.send({action: "login", name: event.target[0].value})
-        history.push("/chat/tim")
+        
     }
 
 

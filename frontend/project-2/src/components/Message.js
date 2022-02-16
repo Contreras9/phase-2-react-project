@@ -1,8 +1,8 @@
 import react from "react";
 
-function Message({message}) {
+function Message({message, who}) {
     return (
-        <div className="bubble you">
+        <div className={"bubble " + who}>
             {message}
         </div>
     )
