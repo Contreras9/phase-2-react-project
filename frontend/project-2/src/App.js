@@ -1,46 +1,37 @@
 import './App.css';
-import react, {useEffect, useState} from 'react';
-import UserList from './components/UserList';
+import React, {useEffect, useState} from 'react';
+import { Route, Switch, useHistory} from "react-router-dom";
 import MainDisplay from './components/MainDisplay';
+import Login from "./components/Login";
 
 
 function App() {
 
   const [users, setUsers] = useState({})
   const [send, setsend] = useState()
-//   const users = {"bob" : {name : "bob"}}
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const history = useHistory()
+
+  useEffect( () => {
+    console.log("history changed")
+    history.push(isLoggedIn ? "/chat" : "/")
+  }, [isLoggedIn])
+  
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:7000/ws")
+    const socket = new WebSocket("ws://localhost:3000/ws")
 
     socket.onopen = () => {
-      const sendFunc = obj => {
-        socket.send(JSON.stringify(obj))
-      }
-      
-    setsend({send : sendFunc})
-    console.log("sentfunc")
+      setsend({send : (obj => socket.send(JSON.stringify(obj)))})
     }
 
     socket.onmessage = (event) => {
-      const obj = JSON.parse(event.data)
-      setUsers(obj)
-      // if (obj.action === "join")
-      // {
-      //   setUsers(users => {
-      //     users[obj.user.name] = obj.user
-      //     return users
-      //   })
-      // } else if (obj.action === "leave") {
-      //   setUsers(users => {
-      //     delete users[obj.user.name]
-      //     return users
-      //   })
-      // }
+      setUsers(JSON.parse(event.data))
+      setIsLoggedIn(true)
     }
-console.log('started')
+    
     socket.onclose = () => {
-
+      setIsLoggedIn(false)
     }
   }, [])
 
@@ -48,15 +39,19 @@ console.log('started')
 
   return (
     <div className="wrapper">
-      <div className="container">
-      <UserList
-        users={Object.values(users)}
-      />
+      <Switch> 
+        <Route path="/chat">
         <MainDisplay 
-            send={send}
-            users={users}
+          send={send}
+          users={users}
         />
-    </div>
+       </Route>
+        <Route path="/">
+        <Login 
+          send={send}
+        />
+        </Route>
+      </Switch>
     </div>
   );
 }

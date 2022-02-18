@@ -1,8 +1,12 @@
-import react, { useState} from "react";
+import React, { useState} from "react";
 import { useParams } from "react-router-dom";
 import Message from "./Message";
 
+
+
 function Chat({send, users}) {
+    var time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
     const [message, SetMessage] = useState("")
     let {name} = useParams()
     function changeHandler(event) {
@@ -17,10 +21,10 @@ function Chat({send, users}) {
     console.log(users)
     return (
         <>
-        <div className="top"><span>To: <span className="name">Dog Woofson</span></span></div>
+        <div className="top"><span>To: <span className="name">{name}</span></span></div>
             <div className="chat active-chat" data-chat="person1">
                 <div className="conversation-start">
-                    <span>Today, 6:48 AM</span>
+                    <span>Today, {time}</span>
                 </div>
                 {messages.map(message => {
                     return (

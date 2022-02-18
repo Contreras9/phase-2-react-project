@@ -1,21 +1,23 @@
-import react from "react";
+import React from "react";
 import Chat from "./Chat";
-import Login from "./Login";
+import UserList from "./UserList"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function MainDisplay({send, users}) {
-    return (
-    <div className="right">
-    <Switch>
-    <Route path="/chat/:name" children={<Chat send={send} users={users}/>} />
-    <Route path="/">
-      <Login 
-        send={send}
+  console.log("In maindisplay")
+  console.log(users)
+  return (
+    <div className="container">
+      <UserList
+        users={Object.values(users)}
       />
-    </Route>
-    </Switch>
+      <div className="right">
+      <Switch>
+      <Route path="/chat/:name" children={<Chat send={send} users={users}/>} />
+      </Switch>
+      </div>
     </div>
-    )
+  )
 }
 
 export default MainDisplay;
