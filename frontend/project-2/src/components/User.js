@@ -6,7 +6,7 @@ function User({name, messages, picture}) {
     console.log(messages)
     const previewMessage = messages.length === 0 ? '' : messages[messages.length-1].message.slice(0, 10)
     return (
-        <Link to={`/chat/${name}`}>
+        <Link to={`/chat/${name}`} >
             <li className="person" data-chat="person1">
                 <img src={picture} style={{width:""}} alt="" />
                 <span className="name">{name}</span>

@@ -1,8 +1,8 @@
-import './App.css';
+import '../App.css';
 import React, {useEffect, useState} from 'react';
-import { Route, Switch, useHistory} from "react-router-dom";
-import MainDisplay from './components/MainDisplay';
-import Login from "./components/Login";
+import { Route, Switch, useHistory } from "react-router-dom";
+import MainDisplay from './MainDisplay';
+import Login from "./Login";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   useEffect( () => {
     console.log("history changed")
     history.push(isLoggedIn ? "/chat" : "/")
-  }, [isLoggedIn])
+  }, [isLoggedIn] )
   
 
   useEffect(() => {
@@ -34,26 +34,30 @@ function App() {
       setIsLoggedIn(false)
     }
   }, [])
-
-
-
+  
   return (
     <div className="wrapper">
-      <Switch> 
-        <Route path="/chat">
-        <MainDisplay 
-          send={send}
-          users={users}
-        />
-       </Route>
-        <Route path="/">
-        <Login 
-          send={send}
-        />
-        </Route>
-      </Switch>
-    </div>
+        <Switch>
+          <Route path="/chat" >
+            <MainDisplay 
+            send={send}
+            users={users}
+          />
+         </Route>
+
+          <Route path="/">
+            <Login
+            send={send}
+            />
+            </Route>
+         
+        </Switch>
+      </div>
   );
+
+
+
+
 }
 
 export default App;

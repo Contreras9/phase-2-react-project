@@ -14,7 +14,7 @@ function UserList({users}) {
         <div className="left">
           <div className="top">
             <input type="text" placeholder="Search" onChange={handleChange}/>
-            <a href="javascript:;" className="search"></a>
+            {/* <a href="javascript:;" className="search"></a> */}
           </div>
             <ul className="people">
                {users.filter(user => user.name.toLowerCase().includes(searchFilter.toLowerCase())).map(user => {

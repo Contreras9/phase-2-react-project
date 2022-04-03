@@ -19,7 +19,7 @@ function Login({send}) {
       <input type="text" placeholder="username"/>
       <input type="file" placeholder="Profile Photo"/>
       <button>login</button>
-      <p className="message">Not registered? <a href="#">Create an account</a></p>
+      <p className="message">Not registered? <a href="/">Create an account</a></p>
     </form>
   </div>
 </div>

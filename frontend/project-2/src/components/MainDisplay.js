@@ -1,7 +1,7 @@
 import React from "react";
 import Chat from "./Chat";
 import UserList from "./UserList"
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 function MainDisplay({send, users}) {
   console.log("In maindisplay")
@@ -13,7 +13,8 @@ function MainDisplay({send, users}) {
       />
       <div className="right">
       <Switch>
-      <Route path="/chat/:name" children={<Chat send={send} users={users}/>} />
+      <Route path="/chat/:name" children={ <Chat send={send} users={users} /> }
+      />
       </Switch>
       </div>
     </div>
