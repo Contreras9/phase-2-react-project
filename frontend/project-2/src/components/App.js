@@ -15,7 +15,7 @@ function App() {
   useEffect( () => {
     console.log("history changed")
     history.push(isLoggedIn ? "/chat" : "/")
-  }, [isLoggedIn] )
+  }, [history, isLoggedIn] )
   
 
   useEffect(() => {
@@ -42,22 +42,16 @@ function App() {
             <MainDisplay 
             send={send}
             users={users}
-          />
+            />
          </Route>
-
-          <Route path="/">
+         <Route path="/">
             <Login
             send={send}
             />
-            </Route>
-         
+          </Route>
         </Switch>
-      </div>
+    </div>
   );
-
-
-
-
 }
 
 export default App;
