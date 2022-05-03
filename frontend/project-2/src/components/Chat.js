@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import { useParams } from "react-router-dom";
+import Picker from 'emoji-picker-react';
 import Message from "./Message";
 
 
